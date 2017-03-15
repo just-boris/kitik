@@ -1,0 +1,24 @@
+{
+  "name": "kitik",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "just-boris <just-boris@hotmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/webpack": "^2.2.11",
+    "html-webpack-plugin": "^2.28.0",
+    "ts-loader": "^2.0.1",
+    "ts-node": "^2.1.0",
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "@types/mithril": "^0.0.31",
+    "mithril": "^1.0.1"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  }
+}

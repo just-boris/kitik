@@ -1,0 +1,14 @@
+### Node template
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Project
+build
+
+# Dependency directories
+node_modules/
