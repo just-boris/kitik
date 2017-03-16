@@ -26,21 +26,27 @@ export function createComponent(name: string, Component) {
     components[name] = Component;
 }
 
-export function activate(node: HTMLElement) {
+export function activateNode(node: HTMLElement) {
     const name = node.tagName.toLowerCase();
     const children = Array.prototype.slice.apply(node.childNodes);
     const Component = components[name];
     const component = new Component();
     component.node = node;
+    Object.defineProperty(node, 'kComponent', {value: component});
     const helper = {
         region() {
-            return m('div', {
+            return m('span', {
+                className: 'todo-remove-me',
                 oncreate(vnode: VNode) {
-                    const tmpNode = vnode.dom;
-                    tmpNode.parentNode.replaceChild(children[0], tmpNode);
+                    children.forEach(node => vnode.dom.parentNode.appendChild(node));
                 }
             })
         }
     };
     renderer.render(node, component.render(helper));
+}
+
+export function activate() {
+    const nodes = document.querySelectorAll(Object.keys(components).join(','));
+    Array.prototype.forEach.call(nodes, activateNode)
 }
