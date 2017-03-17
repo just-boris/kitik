@@ -1,14 +1,6 @@
-import renderer = require('mithril/render');
 import m = require('mithril/hyperscript');
-
-interface VNode extends Mithril.VirtualElement {
-    dom: HTMLElement;
-}
-
-export abstract class UIComponent {
-    node: HTMLElement;
-    abstract render(helper: any): Mithril.Children;
-}
+import UIComponent from './component';
+import {VNode} from './interfaces';
 
 interface ComponentsMap {
     [key: string]: {
@@ -17,6 +9,8 @@ interface ComponentsMap {
 }
 
 const components: ComponentsMap = {};
+
+export {UIComponent};
 
 export function jsx(selector: string, attributes: Object, ...children: Mithril.Children[]) {
     return m(selector, attributes, children);
@@ -32,8 +26,7 @@ export function activateNode(node: HTMLElement) {
     const Component = components[name];
     const component = new Component();
     component.node = node;
-    Object.defineProperty(node, 'kComponent', {value: component});
-    const helper = {
+    component.helper = {
         region() {
             return m('span', {
                 className: 'todo-remove-me',
@@ -43,7 +36,8 @@ export function activateNode(node: HTMLElement) {
             })
         }
     };
-    renderer.render(node, component.render(helper));
+    Object.defineProperty(node, 'kComponent', {value: component});
+    component.update();
 }
 
 export function activate() {

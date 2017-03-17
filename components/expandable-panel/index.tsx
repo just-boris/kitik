@@ -4,15 +4,16 @@ class ExpandablePanel extends Kitik.UIComponent {
     isOpen: boolean = false;
 
     onTitleClick = () => {
-        this.isOpen = true;
+        this.isOpen = !this.isOpen;
+        this.update();
     };
 
-    render(helper: any): Mithril.Children {
+    render(): Mithril.Children {
         const title = this.node.getAttribute('title');
         return <div className="k-expandable">
             <h2 className="k-expandable__title" onclick={this.onTitleClick}>{title}</h2>
             {this.isOpen && <div className="k-expandable__text">
-                {helper.region()}
+                {this.helper.region()}
             </div>}
         </div>
     }
