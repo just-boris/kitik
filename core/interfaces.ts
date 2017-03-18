@@ -3,5 +3,5 @@ export interface VNode extends Mithril.VirtualElement {
 }
 
 export interface HelperApi {
-    region() : VNode;
+    region(): VNode;
 }

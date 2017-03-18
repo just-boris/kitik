@@ -1,22 +1,22 @@
-import * as Kitik from '../../core';
-import {property} from '../../core/decorators';
+import * as Kitik from "../../core";
+import {property} from "../../core/decorators";
 
-@Kitik.createComponent('k-expandable')
+@Kitik.createComponent("k-expandable")
 class ExpandablePanel extends Kitik.UIComponent {
     @property
-    isOpen: boolean = false;
+    public isOpen: boolean = false;
 
-    onTitleClick = () => {
-        this.isOpen = !this.isOpen;
-    };
-
-    render(): Mithril.Children {
-        const title = this.node.getAttribute('title');
+    protected render(): Mithril.Children {
+        const title = this.node.getAttribute("title");
         return <div className="k-expandable">
             <h3 className="k-expandable__title" onclick={this.onTitleClick}>{title}</h3>
             {this.isOpen && <div className="k-expandable__text">
                 {this.helper.region()}
             </div>}
-        </div>
+        </div>;
+    }
+
+    private onTitleClick = () => {
+        this.isOpen = !this.isOpen;
     }
 }

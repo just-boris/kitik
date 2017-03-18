@@ -1,4 +1,4 @@
-import '../components';
-import * as Kitik from '../core';
+import "../components";
+import * as Kitik from "../core";
 
 Kitik.activate();

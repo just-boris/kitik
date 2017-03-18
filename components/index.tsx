@@ -1,2 +1,2 @@
-import './expandable-panel';
-import './link';
+import "./expandable-panel";
+import "./link";

@@ -1,8 +1,8 @@
-import * as Kitik from '../../core';
+import * as Kitik from "../../core";
 
-@Kitik.createComponent('k-link')
+@Kitik.createComponent("k-link")
 class Link extends Kitik.UIComponent {
-    render(): Mithril.Children {
-        return <a href={this.node.getAttribute('href')}>{this.helper.region()}</a>;
+    protected render(): Mithril.Children {
+        return <a href={this.node.getAttribute("href")}>{this.helper.region()}</a>;
     }
 }

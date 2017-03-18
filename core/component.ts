@@ -1,14 +1,15 @@
-import renderer = require('mithril/render');
+import renderer = require("mithril/render");
 import {HelperApi} from "./interfaces";
 
 abstract class UIComponent {
-    node: HTMLElement;
-    helper: HelperApi;
-    abstract render(): Mithril.Children;
+    public node: HTMLElement;
+    public helper: HelperApi;
 
-    update() : void {
+    public update(): void {
         renderer.render(this.node, this.render());
     }
+
+    protected abstract render(): Mithril.Children;
 }
 
 export default UIComponent;
