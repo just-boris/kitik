@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "experimentalDecorators": true,
     "jsx": "react",
     "jsxFactory": "Kitik.jsx",
     "sourceMap": true

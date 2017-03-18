@@ -16,8 +16,10 @@ export function jsx(selector: string, attributes: Object, ...children: Mithril.C
     return m(selector, attributes, children);
 }
 
-export function createComponent(name: string, Component) {
-    components[name] = Component;
+export function createComponent(name: string) {
+    return function(Component) {
+        components[name] = Component;
+    };
 }
 
 export function activateNode(node: HTMLElement) {

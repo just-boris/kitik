@@ -20,10 +20,8 @@
     </k-expandable>
     <button id="expand-panel">Expand via property</button>
     <script>
-        document.querySelector('#expand-panel').addEventListener('click', () => {
-            const component = document.querySelector('k-expandable').kComponent;
-            component.isOpen = true;
-            component.update();
+        document.querySelector('#expand-panel').addEventListener('click', function() {
+            document.querySelector('k-expandable').kComponent.isOpen = true;
         });
     </script>
 </body>
