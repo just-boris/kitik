@@ -1,6 +1,7 @@
 import "./styles.scss";
 import * as Kitik from "../../core";
 import {property} from "../../core/decorators";
+import Button from "../button";
 
 @Kitik.createComponent("k-modal")
 export default class Modal extends Kitik.UIComponent {
@@ -11,7 +12,7 @@ export default class Modal extends Kitik.UIComponent {
         const title = this.node.getAttribute("title");
         return <div className="k-modal" hidden={!this.isOpen}>
             <div className="k-modal__window">
-                <button type="button" className="k-modal__close" onclick={this.onCloseClick}>&times;</button>
+                <Button type="button" className="k-modal__close" onclick={this.onCloseClick}>&times;</Button>
                 <h3 className="k-modal__title">{title}</h3>
                 <div className="k-modal__body">{this.helper.region()}</div>
             </div>

@@ -19,12 +19,13 @@
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
-    "@types/mithril": "^0.0.31",
+    "@types/core-js": "^0.9.37",
+    "@types/mithril": "github:spacejack/mithril.d.ts#1.0.2",
     "core-js": "^2.4.1",
     "mithril": "^1.0.1"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
     "start": "webpack-dev-server --hot --inline",
     "pretest": "tslint {components,core,demo}/**/*.ts{,x}"
   }

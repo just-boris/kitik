@@ -2,9 +2,17 @@
 # yarn lockfile v1
 
 
+"@types/core-js@^0.9.37":
+  version "0.9.37"
+  resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-0.9.37.tgz#461f4a29f2d34c62c45a0623aeb72c2db696b03c"
+
 "@types/mithril@^0.0.31":
   version "0.0.31"
   resolved "https://registry.yarnpkg.com/@types/mithril/-/mithril-0.0.31.tgz#e5bafa63dee0b12ef980502d4ddff5f4858f6852"
+
+"@types/mithril@github:spacejack/mithril.d.ts#1.0.2":
+  version "1.0.2"
+  resolved "https://codeload.github.com/spacejack/mithril.d.ts/tar.gz/4083437b6ba0a8bfe22cc2e2013fb82f14bd8c83"
 
 "@types/node@*":
   version "7.0.8"
@@ -843,13 +851,13 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@2.6.1:
+debug@2.6.1, debug@^2.2.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
     ms "0.7.2"
 
-debug@^2.2.0, debug@~2.2.0:
+debug@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
