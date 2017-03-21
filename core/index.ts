@@ -1,6 +1,6 @@
 import m = require("mithril/hyperscript");
 import UIComponent from "./component";
-import {VNode} from "./interfaces";
+import {ComponentElement, VNode} from "./interfaces";
 
 interface ComponentsMap {
     [key: string]: {
@@ -10,7 +10,7 @@ interface ComponentsMap {
 
 const components: ComponentsMap = {};
 
-export {UIComponent};
+export {UIComponent, ComponentElement};
 
 export function jsx(selector: string, attributes: Object, ...children: Mithril.Children[]) {
     return m(selector, attributes, children);
@@ -29,16 +29,24 @@ export function activateNode(node: HTMLElement): void {
     const component = new Component();
     component.node = node;
     component.helper = {
-        region() {
-            return m("span", {
-                className: "todo-remove-me",
-                oncreate(vnode: VNode) {
-                    children.forEach(childNode => vnode.dom.parentNode.appendChild(childNode));
+        region(): VNode {
+            return {
+                tag: "[",
+                dom: undefined,
+                attrs: {
+                    oncreate(vnode: VNode) {
+                        children.forEach(childNode => vnode.dom.parentNode.appendChild(childNode));
+                    },
                 },
-            });
+                children: [{
+                    tag: "#",
+                    attrs: {},
+                    children: [],
+                }],
+            };
         },
     };
-    Object.defineProperty(node, "kComponent", {value: component});
+    (node as ComponentElement).kComponent = component;
     component.update();
 }
 

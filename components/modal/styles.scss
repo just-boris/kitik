@@ -1,0 +1,22 @@
+.k-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(50, 50, 50, 0.5);
+  &__window {
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #6f6f6f;
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 1em;
+  }
+  &__title {
+    margin: 0;
+  }
+  &__close {
+    float: right;
+  }
+}

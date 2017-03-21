@@ -2,7 +2,7 @@ import * as Kitik from "../../core";
 import {property} from "../../core/decorators";
 
 @Kitik.createComponent("k-expandable")
-class ExpandablePanel extends Kitik.UIComponent {
+export default class ExpandablePanel extends Kitik.UIComponent {
     @property
     public isOpen: boolean = false;
 
