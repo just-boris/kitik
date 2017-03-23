@@ -1,6 +1,6 @@
 import UIComponent from "./component";
 
-export interface ComponentElement extends HTMLElement {
+export interface ComponentElement extends Element {
     kComponent: UIComponent;
 }
 

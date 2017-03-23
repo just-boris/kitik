@@ -1,7 +1,7 @@
 import m = require("mithril/hyperscript");
 import UIComponent, {UIComponentConstructor} from "./component";
 import {ComponentElement} from "./interfaces";
-import MithrilView from "./mithrill-view";
+import MithrilView, {instantiateComponent} from "./mithrill-view";
 
 interface ComponentsMap {
     [key: string]: UIComponentConstructor;
@@ -26,33 +26,29 @@ export function createComponent(name: string): ClassDecorator {
     };
 }
 
-export function activateNode(node: HTMLElement): void {
+function htmlToVNode(html: Element[]): Mithril.Children {
+    return {
+        tag: "[",
+        state: null,
+        attrs: {
+            oncreate(vnode: Mithril.VnodeDOM<null, null>) {
+                html.forEach(node => vnode.dom.parentNode.appendChild(node));
+            },
+        },
+        children: [{
+            tag: "#",
+            state: null,
+            attrs: null,
+            children: [],
+        }],
+    };
+}
+
+export function activateNode(node: Element): void {
     const name = node.tagName.toLowerCase();
     const children = Array.prototype.slice.apply(node.childNodes);
     const Component = components[name];
-    const component = new Component();
-    component.node = node;
-    component.helper = {
-        region(): Mithril.Children {
-            return {
-                tag: "[",
-                state: null,
-                attrs: {
-                    oncreate(vnode: Mithril.VnodeDOM<null, null>) {
-                        children.forEach(childNode => vnode.dom.parentNode.appendChild(childNode));
-                    },
-                },
-                children: [{
-                    tag: "#",
-                    state: null,
-                    attrs: null,
-                    children: [],
-                }],
-            };
-        },
-    };
-    (node as ComponentElement).kComponent = component;
-    component.update();
+    instantiateComponent(node, Component, htmlToVNode(children));
 }
 
 export function activate(): void {
