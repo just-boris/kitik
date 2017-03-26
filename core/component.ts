@@ -2,8 +2,13 @@ import renderer = require("mithril/render");
 import {HelperApi} from "./interfaces";
 
 abstract class UIComponent {
-    public node: Element;
-    public helper: HelperApi;
+    protected node: Element;
+    protected helper: HelperApi;
+
+    constructor(node, helper) {
+        this.node = node;
+        this.helper = helper;
+    }
 
     public update(): void {
         renderer.render(this.node, this.render());
@@ -14,7 +19,7 @@ abstract class UIComponent {
 
 export interface UIComponentConstructor {
     displayName: string;
-    new (): UIComponent;
+    new (node: Element, helper: HelperApi): UIComponent;
 }
 
 export default UIComponent;

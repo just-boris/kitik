@@ -22,7 +22,8 @@
     "@types/core-js": "^0.9.37",
     "@types/mithril": "github:spacejack/mithril.d.ts#1.0.2",
     "core-js": "^2.4.1",
-    "mithril": "^1.0.1"
+    "mithril": "^1.0.1",
+    "typedoc": "^0.5.9"
   },
   "scripts": {
     "build": "webpack -p",

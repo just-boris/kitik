@@ -15,13 +15,10 @@ interface AttrsShape {
 }
 
 export function instantiateComponent(node: Element, Component: UIComponentConstructor, children): UIComponent {
-    const component = new Component();
-    component.node = node;
-    component.helper = {
-        region() {
-            return children;
-        },
+    const helper = {
+        region: () => children,
     };
+    const component = new Component(node, helper);
     (node as ComponentElement).kComponent = component;
     component.update();
     return component;

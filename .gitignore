@@ -9,6 +9,7 @@ coverage
 
 # Project
 build
+docs
 
 # Dependency directories
 node_modules/
