@@ -1,25 +1,29 @@
 import renderer = require("mithril/render");
-import {HelperApi} from "./interfaces";
+import {RegionsMap, ChildNodes} from "./interfaces";
 
 abstract class UIComponent {
     protected node: Element;
-    protected helper: HelperApi;
+    protected regions: RegionsMap;
 
-    constructor(node, helper) {
+    constructor(node, regions) {
         this.node = node;
-        this.helper = helper;
+        this.regions = regions;
     }
 
     public update(): void {
         renderer.render(this.node, this.render());
     }
 
-    protected abstract render(): Mithril.Children;
+    protected getRegion(name): ChildNodes {
+        return this.regions[name];
+    }
+
+    protected abstract render(): ChildNodes;
 }
 
 export interface UIComponentConstructor {
     displayName: string;
-    new (node: Element, helper: HelperApi): UIComponent;
+    new (node: Element, regions: RegionsMap): UIComponent;
 }
 
 export default UIComponent;

@@ -16,3 +16,16 @@ export function property(target: Kitik.UIComponent, key: string): void {
         },
     });
 }
+
+export function region(name: string, configuration: any = {}): PropertyDecorator {
+    return (target: Kitik.UIComponent, key: string) => {
+        Object.defineProperty(target, key, {
+            set() {
+                throw new Error("Region values are read-only");
+            },
+            get() {
+                return this.getRegion(configuration.isDefault ? "default" : name);
+            },
+        });
+    };
+}

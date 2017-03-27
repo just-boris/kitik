@@ -1,6 +1,6 @@
 import m = require("mithril/hyperscript");
 import UIComponent, {UIComponentConstructor} from "./component";
-import {ComponentElement} from "./interfaces";
+import {ComponentElement, RegionsMap, ChildNodes} from "./interfaces";
 import MithrilView, {instantiateComponent} from "./mithrill-view";
 
 interface ComponentsMap {
@@ -11,7 +11,7 @@ const components: ComponentsMap = {};
 
 export {UIComponent, ComponentElement};
 
-export function jsx(Selector: string | UIComponentConstructor, attributes: Object, ...children: Mithril.Children[]) {
+export function jsx(Selector: string | UIComponentConstructor, attributes: Object, ...children: ChildNodes[]) {
     if (typeof Selector === "function") {
         return m(MithrilView, {Component: Selector, originalAttrs: attributes}, ...children);
     } else {
@@ -26,7 +26,7 @@ export function createComponent(name: string): ClassDecorator {
     };
 }
 
-function htmlToVNode(html: Element[]): Mithril.Children {
+function htmlToVNode(html: Element[]) {
     return {
         tag: "[",
         state: null,
@@ -44,11 +44,26 @@ function htmlToVNode(html: Element[]): Mithril.Children {
     };
 }
 
+function htmlToRegions(html: Element[]): RegionsMap {
+    const regions = {};
+    const defaultRegion = [];
+    html.forEach(node => {
+        const name = node.nodeType === node.ELEMENT_NODE && node.getAttribute("data-region");
+        if (name) {
+            regions[name] = htmlToVNode([node]);
+        } else {
+            defaultRegion.push(node);
+        }
+    });
+    regions["default"] = htmlToVNode(defaultRegion);
+    return regions;
+}
+
 export function activateNode(node: Element): void {
     const name = node.tagName.toLowerCase();
     const children = Array.prototype.slice.apply(node.childNodes);
     const Component = components[name];
-    instantiateComponent(node, Component, htmlToVNode(children));
+    instantiateComponent(node, Component, htmlToRegions(children));
 }
 
 export function activate(): void {

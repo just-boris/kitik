@@ -1,5 +1,6 @@
 import * as Kitik from "../../core";
-import {property} from "../../core/decorators";
+import {property, region} from "../../core/decorators";
+import {ChildNodes} from "../../core/interfaces";
 
 /**
  * Expandable panel. Allows to open and collapse content via clicking on the title
@@ -12,15 +13,17 @@ export default class ExpandablePanel extends Kitik.UIComponent {
     @property
     public isOpen: boolean = false;
 
-    get title() {
-        return this.node.getAttribute("title");
-    }
+    @region("title")
+    private readonly title: ChildNodes;
 
-    protected render(): Mithril.Children {
+    @region("body", {isDefault: true})
+    private readonly body: ChildNodes;
+
+    protected render(): ChildNodes {
         return <div className="k-expandable">
             <h3 className="k-expandable__title" onclick={this.onTitleClick}>{this.title}</h3>
             {this.isOpen && <div className="k-expandable__text">
-                {this.helper.region()}
+                {this.body}
             </div>}
         </div>;
     }

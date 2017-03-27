@@ -1,6 +1,6 @@
 import m = require("mithril/hyperscript");
 import UIComponent, {UIComponentConstructor} from "./component";
-import {ComponentElement} from "./interfaces";
+import {ComponentElement, RegionsMap} from "./interfaces";
 import Component = Mithril.Component;
 import Vnode = Mithril.Vnode;
 import VnodeDOM = Mithril.VnodeDOM;
@@ -14,11 +14,12 @@ interface AttrsShape {
     originalAttrs: Object;
 }
 
-export function instantiateComponent(node: Element, Component: UIComponentConstructor, children): UIComponent {
-    const helper = {
-        region: () => children,
-    };
-    const component = new Component(node, helper);
+export function instantiateComponent(
+    node: Element,
+    Component: UIComponentConstructor,
+    regions: RegionsMap,
+): UIComponent {
+    const component = new Component(node, regions);
     (node as ComponentElement).kComponent = component;
     component.update();
     return component;
@@ -27,7 +28,7 @@ export function instantiateComponent(node: Element, Component: UIComponentConstr
 const MithrilView: Component<AttrsShape, StateShape> = {
     oncreate(vnode: VnodeDOM<AttrsShape, StateShape>) {
         const {Component} = vnode.attrs;
-        vnode.state.component = instantiateComponent(vnode.dom, Component, vnode.children);
+        vnode.state.component = instantiateComponent(vnode.dom, Component, {default: vnode.children});
     },
 
     view(vnode: VnodeDOM<AttrsShape, StateShape>): Vnode<any, any> {

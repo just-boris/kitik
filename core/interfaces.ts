@@ -4,6 +4,8 @@ export interface ComponentElement extends Element {
     kComponent: UIComponent;
 }
 
-export interface HelperApi {
-    region(): Mithril.Children;
+export type ChildNodes = Mithril.Children;
+
+export interface RegionsMap {
+    [key: string]: ChildNodes;
 }
