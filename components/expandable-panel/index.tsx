@@ -1,5 +1,4 @@
 import * as Kitik from "../../core";
-import {property, region} from "../../core/decorators";
 import {ChildNodes} from "../../core/interfaces";
 
 /**
@@ -10,13 +9,13 @@ export default class ExpandablePanel extends Kitik.UIComponent {
     /**
      * Property, describing whether panel is open or not
      */
-    @property
+    @Kitik.property
     public isOpen: boolean = false;
 
-    @region("title")
+    @Kitik.region("title")
     private readonly title: ChildNodes;
 
-    @region("body", {isDefault: true})
+    @Kitik.region("body", {isDefault: true})
     private readonly body: ChildNodes;
 
     protected render(): ChildNodes {

@@ -1,15 +1,14 @@
 import "./styles.scss";
 import * as Kitik from "../../core";
-import {property, region} from "../../core/decorators";
 import {ChildNodes} from "../../core/interfaces";
 import Button from "../button";
 
 @Kitik.createComponent("k-modal")
 export default class Modal extends Kitik.UIComponent {
-    @property
+    @Kitik.property
     private isOpen: boolean = true;
 
-    @region("default")
+    @Kitik.region("default")
     private body: ChildNodes;
 
     protected render(): Mithril.Children {
