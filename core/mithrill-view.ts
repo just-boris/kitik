@@ -1,6 +1,6 @@
 import m = require("mithril/hyperscript");
 import UIComponent, {UIComponentConstructor} from "./component";
-import {ComponentElement, RegionsMap} from "./interfaces";
+import {RegionsMap} from "./interfaces";
 import Component = Mithril.Component;
 import Vnode = Mithril.Vnode;
 import VnodeDOM = Mithril.VnodeDOM;
@@ -20,7 +20,6 @@ export function instantiateComponent(
     regions: RegionsMap,
 ): UIComponent {
     const component = new Component(node, regions);
-    (node as ComponentElement).kComponent = component;
     component.update();
     return component;
 }

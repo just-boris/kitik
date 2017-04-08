@@ -1,12 +1,13 @@
 import renderer = require("mithril/render");
-import {RegionsMap, ChildNodes} from "./interfaces";
+import {RegionsMap, ChildNodes, ComponentElement} from "./interfaces";
 
 abstract class UIComponent {
-    protected node: Element;
+    protected node: ComponentElement;
     protected regions: RegionsMap;
 
     constructor(node, regions) {
         this.node = node;
+        node.kComponent = this;
         this.regions = regions;
     }
 

@@ -1,6 +1,6 @@
 import m = require("mithril/hyperscript");
 import {UIComponentConstructor} from "./component";
-import {RegionsMap} from "./interfaces";
+import {RegionsMap, ComponentElement} from "./interfaces";
 import {instantiateComponent} from "./mithrill-view";
 
 interface ComponentsMap {
@@ -17,13 +17,21 @@ export function createComponent(name: string): ClassDecorator {
 }
 
 function htmlToVNode(html: Element[]) {
+    function attachHtml(vnode: Mithril.VnodeDOM<null, {element: Element}>) {
+        if (!vnode.state.element) {
+            vnode.state.element = vnode.dom.parentElement;
+        }
+        const parentElement = vnode.state.element;
+        parentElement.innerHTML = "";
+        html.forEach(node => parentElement.appendChild(node));
+    }
+
     return {
         tag: "[",
-        state: null,
+        state: {},
         attrs: {
-            oncreate(vnode: Mithril.VnodeDOM<null, null>) {
-                html.forEach(node => vnode.dom.parentNode.appendChild(node));
-            },
+            oncreate: attachHtml,
+            onupdate: attachHtml,
         },
         children: [{
             tag: "#",
@@ -50,6 +58,9 @@ function htmlToRegions(html: Element[]): RegionsMap {
 }
 
 export function activateNode(node: Element): void {
+    if ((node as ComponentElement).kComponent) {
+        return;
+    }
     const name = node.tagName.toLowerCase();
     const children = Array.prototype.slice.apply(node.childNodes);
     const Component = components[name];
