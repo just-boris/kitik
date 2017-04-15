@@ -1,4 +1,5 @@
-import {ExpandablePanel} from "../components";
+import {TabSelectEvent} from "../components/tabs";
+import ExpandablePanel from "../components/expandable-panel";
 import {ComponentElement} from "../core/interfaces";
 import * as Kitik from "../core";
 // import module with side-effects
@@ -21,4 +22,8 @@ qs("#open-modal").addEventListener("click", () => {
     element.innerHTML = `<p>My modal content<p><p>Supports <a href="">Html</a></p>`;
     document.body.appendChild(element);
     Kitik.activateNode(element);
+});
+
+qs("k-tabs").addEventListener("tabSelect", (event: TabSelectEvent) => {
+   console.log(event.detail.tabIndex, event.detail.config);
 });

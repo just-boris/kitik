@@ -1,5 +1,6 @@
 import renderer = require("mithril/render");
 import {RegionsMap, ChildNodes, ComponentElement} from "./interfaces";
+import ComponentEvent from "./event";
 
 abstract class UIComponent {
     protected node: ComponentElement;
@@ -13,6 +14,10 @@ abstract class UIComponent {
 
     public update(): void {
         renderer.render(this.node, this.render());
+    }
+
+    protected fireEvent(event: ComponentEvent<any>) {
+        this.node.dispatchEvent(event);
     }
 
     protected getRegion(name): ChildNodes {

@@ -8,6 +8,17 @@ interface TabConfig {
     content: ChildNodes;
 }
 
+interface TabSelectDetail {
+    tabIndex: number;
+    config: TabConfig;
+}
+
+export class TabSelectEvent extends Kitik.ComponentEvent<TabSelectDetail> {
+    constructor(tabIndex, config) {
+        super("tabSelect", {tabIndex, config});
+    }
+}
+
 function TabItem({tab, onclick, selectedTab}) {
     let className = "k-tabs__item";
     if (tab === selectedTab) {
@@ -51,6 +62,7 @@ export default class Tabs extends Kitik.UIComponent {
 
     private selectTab(tab: TabConfig) {
         this.selectedTab = tab;
+        this.fireEvent(new TabSelectEvent(this.tabs.indexOf(tab), tab));
         this.update();
     }
 }
