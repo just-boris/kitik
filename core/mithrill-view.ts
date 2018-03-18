@@ -1,9 +1,7 @@
+import {Component, Vnode, VnodeDOM} from "mithril";
 import m = require("mithril/hyperscript");
 import UIComponent, {UIComponentConstructor} from "./component";
 import {RegionsMap} from "./interfaces";
-import Component = Mithril.Component;
-import Vnode = Mithril.Vnode;
-import VnodeDOM = Mithril.VnodeDOM;
 
 interface StateShape {
     component: UIComponent;

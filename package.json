@@ -5,29 +5,30 @@
   "author": "just-boris <just-boris@hotmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/webpack": "^2.2.11",
-    "css-loader": "^0.27.3",
-    "html-webpack-plugin": "^2.28.0",
-    "node-sass": "^4.5.0",
-    "sass-loader": "^6.0.3",
-    "style-loader": "^0.14.1",
-    "ts-loader": "^2.0.1",
-    "ts-node": "^2.1.0",
-    "tslint": "^4.5.1",
-    "typescript": "^2.2.1",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1"
+    "@types/webpack": "^4.1.1",
+    "css-loader": "^0.28.11",
+    "html-webpack-plugin": "^3.0.6",
+    "node-sass": "^4.8.2",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "ts-loader": "^4.1.0",
+    "ts-node": "^5.0.1",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2",
+    "webpack": "^4.1.1",
+    "webpack-serve": "^0.2.0"
   },
   "dependencies": {
-    "@types/core-js": "^0.9.37",
-    "@types/mithril": "github:spacejack/mithril.d.ts#1.0.2",
-    "core-js": "^2.4.1",
-    "mithril": "^1.0.1",
-    "typedoc": "^0.5.9"
+    "@types/core-js": "^0.9.46",
+    "@types/mithril": "^1.1.12",
+    "core-js": "^2.5.3",
+    "mithril": "^1.1.6",
+    "typedoc": "^0.11.1",
+    "webpack-cli": "^2.0.12"
   },
   "scripts": {
     "build": "webpack -p",
-    "start": "webpack-dev-server --hot --inline",
+    "start": "webpack-serve",
     "pretest": "tslint {components,core,demo}/**/*.ts{,x}"
   }
 }

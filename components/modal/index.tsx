@@ -11,7 +11,7 @@ export default class Modal extends Kitik.UIComponent {
     @Kitik.region("default")
     private body: ChildNodes;
 
-    protected render(): Mithril.Children {
+    protected render(): ChildNodes {
         const title = this.node.getAttribute("title");
         return <div className="k-modal" hidden={!this.isOpen}>
             <div className="k-modal__window">

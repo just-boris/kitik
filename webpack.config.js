@@ -1,13 +1,14 @@
-import webpack = require("webpack");
-import HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const configuration: webpack.Configuration = {
+const configuration = {
     entry: "./demo",
     output: {
         path: __dirname + "/build",
         pathinfo: true,
         filename: "[name].js",
     },
+    mode: "development",
     resolve: {
       extensions: [".js", ".ts", ".tsx"],
     },
@@ -29,4 +30,4 @@ const configuration: webpack.Configuration = {
     devServer: {},
 };
 
-export default configuration;
+module.exports = configuration;

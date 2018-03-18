@@ -1,3 +1,4 @@
+import Mithril = require("mithril");
 import m = require("mithril/hyperscript");
 import {UIComponentConstructor} from "./component";
 import {RegionsMap, ComponentElement} from "./interfaces";
@@ -9,7 +10,7 @@ interface ComponentsMap {
 
 const components: ComponentsMap = {};
 
-export function createComponent(name: string): ClassDecorator {
+export function createComponent(name: string) {
     return (Component: UIComponentConstructor) => {
         Component.displayName = name;
         components[name] = Component;

@@ -1,3 +1,4 @@
+import Mithril = require("mithril");
 import UIComponent from "./component";
 
 export interface ComponentElement extends Element {

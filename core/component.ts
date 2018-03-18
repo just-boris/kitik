@@ -28,7 +28,7 @@ abstract class UIComponent {
 }
 
 export interface UIComponentConstructor {
-    displayName: string;
+    displayName?: string;
     new (node: Element, regions: RegionsMap): UIComponent;
 }
 
